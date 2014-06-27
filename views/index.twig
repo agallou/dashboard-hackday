@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+      }
+      .issue-number {
+        font-size: 19em;
+      }
+      .issue-type {
+        font-size: 5em;
+        text-decoration: underline;
+      }
+      .issue-list-type {
+        font-size: 3em;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <div class="issue-type">Issues soumises</div>
+        <div class="issue-number">{{ issues|length }}</div>
+      </div>
+      <div class="col-md-6 text-center">
+        <div class="issue-type">Issues fermées</div>
+        <div class="issue-number">{{ issues|length }}</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <div class="issue-list-type">Dernières issues soumises</div>
+        <div class="issue-list">
+          <ul>
+          {% for issue in issues %}
+            <li>{{ issue.title }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 text-center">
+        <div class="issue-list-type">Dernières issues fermées</div>
+        <div class="issue-list">
+          {{ issues|length }}
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
