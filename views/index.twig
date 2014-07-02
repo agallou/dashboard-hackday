@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-6 text-center">
         <div class="issue-type">Issues fermées</div>
-        <div class="issue-number">{{ issues|length }}</div>
+        <div class="issue-number">{{ closed_issues|length }}</div>
       </div>
     </div>
 
@@ -36,8 +36,8 @@
         <div class="issue-list-type">Dernières issues soumises</div>
         <div class="issue-list">
           <ul>
-          {% for issue in issues %}
-            <li>{{ issue.title }}</li>
+          {% for issue in last_issues %}
+              <li>{{ issue.number }} - {{ issue.title }} ({{ issue.user.login }})</li>
           {% endfor %}
           </ul>
         </div>
@@ -45,7 +45,9 @@
       <div class="col-md-6 text-center">
         <div class="issue-list-type">Dernières issues fermées</div>
         <div class="issue-list">
-          {{ issues|length }}
+          {% for issue in closed_issues %}
+            <li>{{ issue.number }} - {{ issue.title }} ({{ issue.user.login }})</li>
+          {% endfor %}
         </div>
       </div>
     </div>
