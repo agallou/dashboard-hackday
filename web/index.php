@@ -4,19 +4,28 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
-$issuesIds = array(
-  'symfony/symfony/issues/5',
-  'symfony/symfony/issues/6',
-  'symfony/symfony/issues/7',
-  'symfony/symfony/issues/8',
-  'symfony/symfony/issues/11263',
-);
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Parser;
+
+$yaml = new Parser();
+$issuesIds = $yaml->parse(file_get_contents(__DIR__ . '/../config/issues.yml'));
+
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
-$client = new GuzzleHttp\Client(array('base_url' => 'https://api.github.com'));
+try {
+    $githubConfig = $yaml->parse(file_get_contents(__DIR__ . '/../config/github.yml'));
+    $githubToken = $githubConfig['token'];
+} catch (ParseException $e) {
+    $githubToken = getenv('GITHUB_TOKEN');
+}
+
+$client = new GuzzleHttp\Client(array(
+    'base_url' => 'https://api.github.com',
+    'defaults' => array('auth' => array(null, $githubToken)),
+));
 
 $app->get('/', function() use($app, $client, $issuesIds) {
 
