@@ -23,10 +23,15 @@ if (is_file($githubConfigFilepath)) {
     $githubToken = getenv('GITHUB_TOKEN');
 }
 
-$client = new GuzzleHttp\Client(array(
+$guzzleConfig = array(
     'base_url' => 'https://api.github.com',
-    'defaults' => array('auth' => array(null, $githubToken)),
-));
+);
+
+if (strlen($githubToken) > 0) {
+    $guzzleConfig['defaults'] = array('auth' => array(null, $githubToken));
+}
+
+$client = new GuzzleHttp\Client($guzzleConfig);
 
 $app->get('/', function() use($app, $client, $issuesIds) {
 
