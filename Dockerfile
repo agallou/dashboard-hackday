@@ -23,6 +23,8 @@ ADD docker/vhost.conf /etc/nginx/sites-enabled/default
  
 WORKDIR /var/www
 
+VOLUME ["/var/www"]
+
 EXPOSE 80
  
 CMD ["/usr/local/bin/entrypoint.sh"]
