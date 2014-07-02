@@ -18,6 +18,8 @@ RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 ADD docker/services/ /srv/services
 ADD . /var/www
 
+RUN echo "env[GITHUB_TOKEN] = '`echo $GITHUB_TOKEN`'" >> /etc/php5/fpm/php-fpm.conf
+
 ADD docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 ADD docker/vhost.conf /etc/nginx/sites-enabled/default
  
