@@ -15,10 +15,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
-try {
-    $githubConfig = $yaml->parse(file_get_contents(__DIR__ . '/../config/github.yml'));
+$githubConfigFilepath = __DIR__ . '/../config/github.yml';
+if (is_file($githubConfigFilepath)) {
+    $githubConfig = $yaml->parse(file_get_contents($githubConfigFilepath));
     $githubToken = $githubConfig['token'];
-} catch (ParseException $e) {
+} else {
     $githubToken = getenv('GITHUB_TOKEN');
 }
 
