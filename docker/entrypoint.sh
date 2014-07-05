@@ -10,6 +10,8 @@ fi
 if [ ! -z "$GITHUB_TOKEN" ]; then
     echo "env[GITHUB_TOKEN] = '`echo $GITHUB_TOKEN`'" >> /etc/php5/fpm/php-fpm.conf;
     
+    mkdir /.composer
+    
     cat > /.composer/config.json <<EOF
 {
     "config": {
