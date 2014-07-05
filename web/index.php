@@ -11,6 +11,10 @@ $yaml = new Parser();
 $issuesIds = $yaml->parse(file_get_contents(__DIR__ . '/../config/issues.yml'));
 
 
+if (1 == getenv('HACKDAY_DEBUG')) {
+    $app['debug'] = true;
+}
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
