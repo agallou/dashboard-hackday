@@ -1,6 +1,3 @@
-- symfony/symfony/issues/5
-- symfony/symfony/issues/5
-- symfony/symfony/issues/6
-- symfony/symfony/issues/7
-- symfony/symfony/issues/8
-- symfony/symfony/issues/11263
+- doctrine/migrations/issues/173
+- 1up-lab/OneupUploaderBundle/issues/114
+- sensiolabs/SensioGeneratorBundle/issues/280
